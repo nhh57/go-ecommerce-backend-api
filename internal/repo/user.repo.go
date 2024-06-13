@@ -1,4 +1,4 @@
-package repository
+package repo
 
 type UserRepo struct{}
 
