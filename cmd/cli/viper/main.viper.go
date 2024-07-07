@@ -36,7 +36,9 @@ func main() {
 	if err := viper.Unmarshal(&config); err != nil {
 		fmt.Printf("Unable to decode configuration %v", err)
 	}
+
 	fmt.Println("Config Port ::", config.Server.Port)
+
 	for _, db := range config.Databases {
 		fmt.Printf("databases User: %s,password: %s, host: %s", db.User, db.Password, db.Host)
 	}

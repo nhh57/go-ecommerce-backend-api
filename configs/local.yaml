@@ -1,15 +1,19 @@
 server:
   port: 8082
-databases:
-- user: admin
-  password: admin
+mysql:
   host: localhost
+  port: 33306
+  username: root
+  password: root123
   dbName: shopDEV
-  databases:
-- user: order
-  password: admin
-  host: localhost
-  dbName: shopDEV
-security:
-  jwt:
-    key: abc123
+  maxIdleConns: 10
+  maxOpenConns: 100
+  conMaxLifetime: 3600
+logger:
+  log_leval: debug
+  file_log_name: "D:/Project/Golang/github.com/nhh57/go-ecommerce-backend-api/storages/logs/dev.xxx.logs"
+  max_size:    500
+  max_backups: 3
+  max_age:     28
+  compress: true
+
