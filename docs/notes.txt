@@ -4,3 +4,5 @@ go get -u go.uber.org/zap
 go get github.com/spf13/viper
 go get github.com/stretchr/testify/assert
 go get github.com/natefinch/lumberjack
+go get -u gorm.io/gorm
+go get github.com/google/uuid
