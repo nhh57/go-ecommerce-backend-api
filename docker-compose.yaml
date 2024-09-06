@@ -1,0 +1,15 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0.33
+    container_name: mysql-microservice
+    environment:
+      MYSQL_ROOT_PASSWORD: Admin123
+      MYSQL_DATABASE: shopDEV
+      MYSQL_USER: hainh
+      MYSQL_PASSWORD: Admin123
+#    volumes:
+#      - /Users/duyphuong/Desktop/HaiNH/database/mysql/mysql8.0.33:/var/lib/mysql
+#      - /Users/duyphuong/Desktop/HaiNH/Java/microservice/data:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
