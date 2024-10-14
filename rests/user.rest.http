@@ -1,0 +1,6 @@
+package rests
+@bashUrl=http://localhost:8002/v1/2024
+
+
+### User Registration
+PORT{{bashUrl}}/user/register
