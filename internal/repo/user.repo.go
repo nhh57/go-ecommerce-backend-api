@@ -16,6 +16,6 @@ func NewUserRepository() IUserRepository {
 }
 func (u userRepository) GetUserByEmail(email string) bool {
 	// SELECT * FROM user WHERE email = '??' ORDER BY email
-	row := global.Mdb.Table(TableNameGoCrmUser).Where("user_email = ?", email).First(&model.GoCrmUser{}).RowsAffected
+	row := global.Mdb.Table(TableNameGoCrmUser).Where("usr_email = ?", email).First(&model.GoCrmUser{}).RowsAffected
 	return row != NumberNull
 }

@@ -13,7 +13,7 @@ type IUserAuthenRepository interface {
 type userAuthenRepository struct{}
 
 func (u userAuthenRepository) AddOTP(email string, otp int, expirationTime int64) error {
-	key := fmt.Sprintf("usr%d:otp", email) //usr:email:otp
+	key := fmt.Sprintf("usr:%s:otp", email) //usr:email:otp
 	return global.Rdb.SetEx(ctx, key, otp, time.Duration(expirationTime)).Err()
 }
 

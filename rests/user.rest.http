@@ -7,6 +7,6 @@ POST {{bashUrl}}/user/register
 Content-type: application/json
 
 {
-"email" : "haichanhkun57@gmail.com",
+"email" : "",
 "purpose" : "test"
 }
