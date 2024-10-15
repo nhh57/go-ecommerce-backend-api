@@ -1,6 +1,0 @@
-{"level":"INFO","time":"2024-10-13T18:55:12.171+0700","caller":"initialize/mysql.go:29","msg":"Initializing MYSQL Successfully"}
-{"level":"INFO","time":"2024-10-13T18:55:12.369+0700","caller":"initialize/redis.go:45","msg":"value score is::","score":"100"}
-{"level":"INFO","time":"2024-10-13T19:42:52.300+0700","caller":"initialize/mysql.go:29","msg":"Initializing MYSQL Successfully"}
-{"level":"INFO","time":"2024-10-13T19:42:52.327+0700","caller":"initialize/redis.go:45","msg":"value score is::","score":"100"}
-{"level":"INFO","time":"2024-10-13T21:16:43.411+0700","caller":"initialize/mysql.go:29","msg":"Initializing MYSQL Successfully"}
-{"level":"INFO","time":"2024-10-13T21:16:43.428+0700","caller":"initialize/redis.go:45","msg":"value score is::","score":"100"}
