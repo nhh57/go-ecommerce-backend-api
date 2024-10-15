@@ -1,8 +1,10 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/nhh57/go-ecommerce-backend-api/internal/service"
+	"github.com/nhh57/go-ecommerce-backend-api/internal/vo"
 	"github.com/nhh57/go-ecommerce-backend-api/pkg/response"
 )
 
@@ -19,8 +21,13 @@ func NewUserController(
 }
 
 func (uc *UserController) Register(c *gin.Context) {
-
-	result := uc.userService.Register("", "")
+	var params vo.UserRegistratorRequest
+	if err := c.ShouldBindJSON(&params); err != nil {
+		response.ErrorResponse(c, response.ErrCodeParamInvalid, err.Error())
+		return
+	}
+	fmt.Printf("Email params : %s", params.Email)
+	result := uc.userService.Register(params.Email, params.Purpose)
 	response.SuccessResponse(c, result, nil)
 }
 

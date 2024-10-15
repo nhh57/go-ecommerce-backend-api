@@ -1,9 +1,11 @@
 package sendto
 
 import (
+	"bytes"
 	"fmt"
 	"github.com/nhh57/go-ecommerce-backend-api/global"
 	"go.uber.org/zap"
+	"html/template"
 	"net/smtp"
 	"strings"
 )
@@ -14,8 +16,8 @@ type EmailAddress struct {
 }
 
 const (
-	SMTPHost     = "smtp.gmail.com"
-	SMTPPORT     = "587"
+	SMTPHost     = ""
+	SMTPPORT     = ""
 	SMTPUsername = ""
 	SMTPPassword = ""
 )
@@ -49,7 +51,49 @@ func SentTextEmailOtp(to []string, from string, otp string) error {
 	// send smtp
 	authention := smtp.PlainAuth("", SMTPUsername, SMTPUsername, SMTPHost)
 
-	err := smtp.SendMail(SMTPHost+":25", authention, from, to, []byte(messageEmail))
+	err := smtp.SendMail(SMTPHost+":587", authention, from, to, []byte(messageEmail))
+	if err != nil {
+		global.Logger.Error("Email send faild::", zap.Error(err))
+		return err
+	}
+	return nil
+}
+
+func SendTemplateEmailOtp(
+	to []string, from string, nameTemplate string,
+	dataTemplate map[string]interface{},
+) error {
+	htmlBody, err := getEmailTemplate(nameTemplate, dataTemplate)
+	if err != nil {
+		return err
+	}
+	return send(to, from, htmlBody)
+}
+
+func getEmailTemplate(
+	nameTemplate string, dataTemplate map[string]interface{}) (string, error) {
+	htmlTemplate := new(bytes.Buffer)
+	t := template.Must(template.New(nameTemplate).ParseFiles("templates-html/" + nameTemplate))
+	err := t.Execute(htmlTemplate, dataTemplate)
+	if err != nil {
+		return "", err
+	}
+	return htmlTemplate.String(), nil
+}
+
+func send(to []string, from string, htmlTemplate string) error {
+	contentEmail := Mail{
+		From:    EmailAddress{Address: from, Name: "test"},
+		To:      to,
+		Subject: "OTP Verification",
+		Body:    htmlTemplate,
+	}
+	messageEmail := BuildMessage(contentEmail)
+
+	// send smtp
+	authention := smtp.PlainAuth("", SMTPUsername, SMTPUsername, SMTPHost)
+
+	err := smtp.SendMail(SMTPHost+":587", authention, from, to, []byte(messageEmail))
 	if err != nil {
 		global.Logger.Error("Email send faild::", zap.Error(err))
 		return err

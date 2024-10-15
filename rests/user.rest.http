@@ -3,4 +3,10 @@ package rests
 
 
 ### User Registration
-PORT{{bashUrl}}/user/register
+POST {{bashUrl}}/user/register
+Content-type: application/json
+
+{
+"email" : "haichanhkun57@gmail.com",
+"purpose" : "test"
+}
