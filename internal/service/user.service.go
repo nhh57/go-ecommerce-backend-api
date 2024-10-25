@@ -55,7 +55,7 @@ func (us *userService) Register(email string, purpose string) int {
 		return response.ErrInvalidOTP
 	}
 	// 4. send Email OTP
-	err = sendto.SendTemplateEmailOtp([]string{email}, "", "otp-auth.html",
+	err = sendto.SendTemplateEmailOtp([]string{email}, "datnvpk02264@fpt.edu.vn", "otp-auth.html",
 		map[string]interface{}{"otp": strconv.Itoa(otp)})
 	if err != nil {
 		return response.ErrSendEmailOTP

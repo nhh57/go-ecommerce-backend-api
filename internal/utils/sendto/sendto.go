@@ -16,10 +16,10 @@ type EmailAddress struct {
 }
 
 const (
-	SMTPHost     = ""
-	SMTPPORT     = ""
-	SMTPUsername = ""
-	SMTPPassword = ""
+	SMTPHost     = "smtp.gmail.com"
+	SMTPPort     = "587"
+	SMTPUsername = "datnvpk02264@fpt.edu.vn"
+	SMTPPassword = "vvlarxknglgewxvt"
 )
 
 type Mail struct {
@@ -51,7 +51,7 @@ func SentTextEmailOtp(to []string, from string, otp string) error {
 	// send smtp
 	authention := smtp.PlainAuth("", SMTPUsername, SMTPUsername, SMTPHost)
 
-	err := smtp.SendMail(SMTPHost+":587", authention, from, to, []byte(messageEmail))
+	err := smtp.SendMail(SMTPHost+":"+SMTPPort, authention, from, to, []byte(messageEmail))
 	if err != nil {
 		global.Logger.Error("Email send faild::", zap.Error(err))
 		return err
@@ -93,7 +93,7 @@ func send(to []string, from string, htmlTemplate string) error {
 	// send smtp
 	authention := smtp.PlainAuth("", SMTPUsername, SMTPUsername, SMTPHost)
 
-	err := smtp.SendMail(SMTPHost+":587", authention, from, to, []byte(messageEmail))
+	err := smtp.SendMail(SMTPHost+":"+SMTPPort, authention, from, to, []byte(messageEmail))
 	if err != nil {
 		global.Logger.Error("Email send faild::", zap.Error(err))
 		return err

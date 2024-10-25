@@ -18,5 +18,5 @@ down:
 
 .PHONY: run
 
-.PHONE:air
+.PHONE: air
 
