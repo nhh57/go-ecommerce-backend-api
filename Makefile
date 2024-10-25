@@ -1,4 +1,8 @@
-# name app 
+GOOSE_DRIVER ?= "mysql"
+GOOSE_DBSTRING= "root:Admin123@tcp(10.56.66.54:3306)/shopDEV"
+GOOSE_MIGRATION_DIR ?= sql/schema
+
+# name app
 APP_NAME := server
 
 
@@ -16,7 +20,16 @@ up:
 down:
 	docker compose down
 
-.PHONY: run
+upse:
+	@GOOSE_DRIVER=$(GOOSE_DRIVER) GOOSE_DBSTRING=$(GOOSE_DBSTRING) goose -dir=$(GOOSE_MIGRATION_DIR) up
+
+downse:
+	@GOOSE_DRIVER=$(GOOSE_DRIVER) GOOSE_DBSTRING=$(GOOSE_DBSTRING) goose -dir=$(GOOSE_MIGRATION_DIR) down
+
+resetse:
+	@GOOSE_DRIVER=$(GOOSE_DRIVER) GOOSE_DBSTRING=$(GOOSE_DBSTRING) goose -dir=$(GOOSE_MIGRATION_DIR) reset
+
+.PHONY: run downse upse resetse
 
 .PHONE: air
 
