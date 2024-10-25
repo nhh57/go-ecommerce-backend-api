@@ -40,6 +40,7 @@ func (us *userService) Register(email string, purpose string) int {
 	// 6. user spam
 
 	// 1. check email exists in db
+
 	if us.userRepo.GetUserByEmail(email) {
 		return response.ErrCodeUserHasExists
 	}
@@ -55,11 +56,16 @@ func (us *userService) Register(email string, purpose string) int {
 		return response.ErrInvalidOTP
 	}
 	// 4. send Email OTP
-	err = sendto.SendTemplateEmailOtp([]string{email}, "datnvpk02264@fpt.edu.vn", "otp-auth.html",
-		map[string]interface{}{"otp": strconv.Itoa(otp)})
+	//err = sendto.SendTemplateEmailOtp([]string{email}, "datnvpk02264@fpt.edu.vn", "otp-auth.html",
+	//	map[string]interface{}{"otp": strconv.Itoa(otp)})
+	//if err != nil {
+	//	return response.ErrSendEmailOTP
+	//}
+	// send otp by java
+	err = sendto.SendEmailToJavaByAPI(strconv.Itoa(otp), email, "otp-auth.html")
+	fmt.Println("err sendto:Java::%d\n", err)
 	if err != nil {
 		return response.ErrSendEmailOTP
 	}
-
 	return response.ErrCodeSuccess
 }

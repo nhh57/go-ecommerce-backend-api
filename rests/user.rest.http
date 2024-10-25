@@ -10,3 +10,15 @@ Content-type: application/json
 "email" : "nguyenhoanghai0507@gmail.com",
 "purpose" : "test"
 }
+
+
+### JAVA User Registration
+POST http://10.56.66.54:8082/email/send_text
+Content-type: application/json
+
+{
+  "toEmail": "nguyenhoanghai0507@gmail.com",
+  "subject": "Long btc nhé",
+  "messageBody": "8030104659999",
+  "attachment": "MB-HCM"
+}

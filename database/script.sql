@@ -1,4 +1,4 @@
-CREATE TABLE go_crm_user
+CREATE TABLE pre_go_crm_user_c
 (
     usr_id               INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Account ID',
     usr_email            VARCHAR(255) NOT NULL COMMENT 'Email',
@@ -15,5 +15,5 @@ CREATE TABLE go_crm_user
     KEY `inx_email` (`usr_email`),
     KEY `inx_phone` (`usr_phone`),
     KEY `inx_username` (`usr_username`)
-) ENGINE = IGNORE
+) ENGINE = innoDB
   DEFAULT CHARSET = utf8mb4 COMMENT = 'Account';
