@@ -49,7 +49,7 @@ func SentTextEmailOtp(to []string, from string, otp string) error {
 	messageEmail := BuildMessage(contentEmail)
 
 	// send smtp
-	authention := smtp.PlainAuth("", SMTPUsername, SMTPUsername, SMTPHost)
+	authention := smtp.PlainAuth("", SMTPUsername, SMTPPassword, SMTPHost)
 
 	err := smtp.SendMail(SMTPHost+":"+SMTPPort, authention, from, to, []byte(messageEmail))
 	if err != nil {
@@ -91,7 +91,7 @@ func send(to []string, from string, htmlTemplate string) error {
 	messageEmail := BuildMessage(contentEmail)
 
 	// send smtp
-	authention := smtp.PlainAuth("", SMTPUsername, SMTPUsername, SMTPHost)
+	authention := smtp.PlainAuth("", SMTPUsername, SMTPPassword, SMTPHost)
 
 	err := smtp.SendMail(SMTPHost+":"+SMTPPort, authention, from, to, []byte(messageEmail))
 	if err != nil {
