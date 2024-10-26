@@ -2,23 +2,23 @@ server:
   port: 8082
   model: "dev"
 mysql:
-  host: 10.56.66.54
+  host: localhost
   port: 3306
   username: root
   password: Admin123
-  dbName: shopDEV
+  dbName: shopDev
   maxIdleConns: 10
   maxOpenConns: 100
   conMaxLifetime: 3600
 logger:
   log_level: debug
-  file_log_name: "D:/Project/Golang/github.com/nhh57/go-ecommerce-backend-api/storages/logs/dev.xxx.logs"
+  file_log_name: "/go-ecommerce-backend-api/storages/logs/dev.xxx.logs"
   max_size: 500
   max_backups: 3
   max_age: 28
   compress: true
 redis:
-  host: 10.56.66.54
+  host: localhost
   port: 6379
   password:
   database: 0
