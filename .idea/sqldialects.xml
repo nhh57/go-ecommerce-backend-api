@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/sql/queries/pre_go_crm_user_c.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/sql/schema/20241025082912_pre_go_crm_user_c.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/database/script.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/queries/00001_pre_go_acc_user_verify_9999.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/queries/00002_pre_go_acc_user_base_9999.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/queries/00003_pre_go_acc_user_9999.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/schema/20241026150452_00001_pre_go_acc_user_verify_9999.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/schema/20241026152748_00002_pre_go_acc_user_base_9999.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/schema/20241026153414_00003_pre_go_acc_user_9999.sql" dialect="MySQL" />
   </component>
 </project>

@@ -1,5 +1,5 @@
 GOOSE_DRIVER ?= mysql
-GOOSE_DBSTRING ?= "root:Admin123@tcp(localhost:3306)/shopDev"
+GOOSE_DBSTRING ?= "root:Admin123@tcp(127.0.0.1:3306)/shopDev"
 GOOSE_MIGRATION_DIR ?= sql/schema
 # name app
 APP_NAME := server
@@ -16,6 +16,12 @@ dev:
 
 docker_up:
 	docker-compose up -d
+
+up_by_one:
+	@GOOSE_DRIVER=$(GOOSE_DRIVER) GOOSE_DBSTRING=$(GOOSE_DBSTRING) goose -dir=$(GOOSE_MIGRATION_DIR) up-by-one
+#create new a migration
+create_migration:
+	@goose -dir=$(GOOSE_MIGRATION_DIR) create $(name) sql
 
 upse:
 	@GOOSE_DRIVER=$(GOOSE_DRIVER) GOOSE_DBSTRING=$(GOOSE_DBSTRING) goose -dir=$(GOOSE_MIGRATION_DIR) up
