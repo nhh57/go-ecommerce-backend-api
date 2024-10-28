@@ -7,8 +7,9 @@ POST {{bashUrl}}/user/register
 Content-type: application/json
 
 {
-"email" : "nguyenhoanghai0507@gmail.com",
-"purpose" : "test"
+  "verify_key": "nguyenhoanghai0507@gmail.com",
+  "verify_purpose": "TEST_USER",
+  "verify_type": 1
 }
 
 

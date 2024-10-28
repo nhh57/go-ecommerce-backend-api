@@ -6,9 +6,14 @@ go get github.com/spf13/viper
 go get github.com/stretchr/testify/assert
 go get github.com/natefinch/lumberjack
 go get -u gorm.io/gorm
+go get -u gorm.io/gen
 go get github.com/google/uuid
 go get github.com/redis/go-redis/v9
 go get -u github.com/segmentio/kafka-go
 go get -u  github.com/google/wire/cmd/wire
 go get -u  github.com/pressly/goose/v3/cmd/goose@latest
 go get -u github.com/sqlc-dev/sqlc/cmd/sqlc@latest
+
+make create_migration name=00002_pre_go_acc_user_base_9999.sql
+make up_by_one
+make sqlgen

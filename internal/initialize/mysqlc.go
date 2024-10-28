@@ -3,7 +3,6 @@ package initialize
 import (
 	"database/sql"
 	"fmt"
-	"github.com/nhh57/go-ecommerce-backend-api/internal/po"
 	"go.uber.org/zap"
 	"time"
 
@@ -27,7 +26,7 @@ func InitMysqlC() {
 	global.Mdbc = db
 	// set Pool
 	SetPool()
-	migrateTables()
+	//migrateTables()
 }
 
 func SetPoolC() {
@@ -44,8 +43,9 @@ func SetPoolC() {
 
 func migrateTablesC() {
 	err := global.Mdb.AutoMigrate(
-		&po.User{},
-		&po.Role{},
+		//&po.User{},
+		//&po.Role{},
+
 	)
 	if err != nil {
 		fmt.Println("Migrating tables error")

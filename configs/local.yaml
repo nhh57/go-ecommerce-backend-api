@@ -2,11 +2,11 @@ server:
   port: 8082
   model: "dev"
 mysql:
-  host: localhost
+  host: 10.56.66.54
   port: 3306
   username: root
   password: Admin123
-  dbName: shopDev
+  dbName: shopDEV
   maxIdleConns: 10
   maxOpenConns: 100
   conMaxLifetime: 3600
@@ -18,7 +18,7 @@ logger:
   max_age: 28
   compress: true
 redis:
-  host: localhost
+  host: 10.56.66.54
   port: 6379
   password:
   database: 0

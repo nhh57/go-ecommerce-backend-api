@@ -2,7 +2,6 @@ package initialize
 
 import (
 	"fmt"
-	"github.com/nhh57/go-ecommerce-backend-api/internal/po"
 	"go.uber.org/zap"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -30,7 +29,7 @@ func InitMysql() {
 	global.Mdb = db
 	// set Pool
 	SetPool()
-	migrateTables()
+	//migrateTables()
 }
 
 func SetPool() {
@@ -47,8 +46,8 @@ func SetPool() {
 
 func migrateTables() {
 	err := global.Mdb.AutoMigrate(
-		&po.User{},
-		&po.Role{},
+		//&po.User{},
+		//&po.Role{},
 	)
 	if err != nil {
 		fmt.Println("Migrating tables error")
