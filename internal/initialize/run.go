@@ -2,11 +2,12 @@ package initialize
 
 import (
 	"fmt"
+	"github.com/gin-gonic/gin"
 
 	"github.com/nhh57/go-ecommerce-backend-api/global"
 )
 
-func Run() {
+func Run() *gin.Engine {
 	InitLoadConfig()
 	m := global.Config.Mysql
 	fmt.Println("Loading configuration mysql", m.Username, m.Port)
@@ -19,5 +20,6 @@ func Run() {
 	InitKafka()
 
 	r := InitRouter()
-	r.Run(":8002")
+	return r
+	//r.Run(":8002")
 }

@@ -1,0 +1,16 @@
+basePath: /v1/2024
+host: localhost:8082
+info:
+  contact:
+    email: tipsgo@gmail.com
+    name: TEAM TIPSGO
+    url: github.com/nhh57/go-ecommerce-backend-api
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: github.com/nhh57/go-ecommerce-backend-api
+  title: API Documentation Ecommerce Backend SHOPDEVGO
+  version: 1.0.0
+paths: {}
+swagger: "2.0"

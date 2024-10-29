@@ -13,7 +13,7 @@ go get -u github.com/segmentio/kafka-go
 go get -u  github.com/google/wire/cmd/wire
 go get -u  github.com/pressly/goose/v3/cmd/goose@latest
 go get -u github.com/sqlc-dev/sqlc/cmd/sqlc@latest
-
+go get -u github.com/swaggo/swag
 make create_migration name=00002_pre_go_acc_user_base_9999.sql
 make up_by_one
 make sqlgen
