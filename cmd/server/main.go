@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "github.com/nhh57/go-ecommerce-backend-api/cmd/swag/docs"
 	"github.com/nhh57/go-ecommerce-backend-api/internal/initialize"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger" // gin-swagger middleware
@@ -8,7 +9,7 @@ import (
 
 // @title           API Documentation Ecommerce Backend SHOPDEVGO
 // @version         1.0.0
-// @description     This is a sample server celler server.
+// @description     This is a sample server caller server.
 // @termsOfService	github.com/nhh57/go-ecommerce-backend-api
 
 // @contact.name   TEAM TIPSGO
