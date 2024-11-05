@@ -3,6 +3,7 @@ package impl
 import (
 	"context"
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"github.com/nhh57/go-ecommerce-backend-api/global"
 	consts "github.com/nhh57/go-ecommerce-backend-api/internal/const"
@@ -31,9 +32,49 @@ func NewUserLoginImpl(r *database.Queries) *sUserLogin {
 	}
 }
 
-func (s *sUserLogin) Login(ctx context.Context) error {
-	// Implement login logic here.
-	return nil
+func (s *sUserLogin) Login(ctx context.Context, in *model.LoginInput) (codeResult int, out model.LoginInput, err error) {
+	// login login
+	userBase, err := s.r.GetOneUserInfo(ctx, in.UserAccount)
+	if err != nil {
+		return response.ErrCodeAuthFailed, out, err
+	}
+	// 2. check password
+	if !crypto.MatchingPassword(userBase.UserPassword, in.UserPassword, userBase.UserSalt) {
+		return response.ErrCodeAuthFailed, out, fmt.Errorf("does not match password")
+	}
+	// 3. check two-factor authentication
+
+	//4. update password time
+
+	go s.r.LoginUserBase(ctx, database.LoginUserBaseParams{
+		UserLoginIp:  sql.NullString{String: "127.0.0.1", Valid: true},
+		UserAccount:  userBase.UserAccount,
+		UserPassword: userBase.UserPassword, // khong can
+	})
+
+	//5. Create UUID
+	subToken := utils.GenerateCliTokenUUID(int(userBase.UserID))
+	log.Println("subToken::", subToken)
+	// 6. get user_info table
+	infoUser, err := s.r.GetUser(ctx, uint64(userBase.UserID))
+	if err != nil {
+		return response.ErrCodeAuthFailed, out, err
+	}
+
+	// conver to json
+
+	infoUserJson, err := json.Marshal(infoUser)
+	if err != nil {
+		return response.ErrCodeAuthFailed, out, fmt.Errorf("convert to json failed %v::", err)
+	}
+	// 7. give infoUserJson to Redis with key = subToken
+	err := global.Rdb.Set(ctx, subToken, infoUserJson, time.Duration(consts.TIME_OTP_REGISTER)*time.Minute).Err()
+	if err != nil {
+		return response.ErrCodeAuthFailed, out, err
+	}
+
+	//8. create
+	return 200, out, nil
 }
 
 func (s *sUserLogin) Register(ctx context.Context, in *model.RegisterInput) (codeResult int, err error) {
@@ -183,7 +224,7 @@ func (s *sUserLogin) UpdatePasswordRegister(ctx context.Context, token string, p
 	// add user_id to user_info table
 	newUserInfo, err := s.r.AddUserHaveUserId(ctx, database.AddUserHaveUserIdParams{
 		UserID:               uint64(user_id),
-		UserAccount:          infoOTP.VerifyOtp,
+		UserAccount:          infoOTP.VerifyKey,
 		UserNickname:         sql.NullString{String: infoOTP.VerifyKey, Valid: true},
 		UserAvatar:           sql.NullString{String: "", Valid: true},
 		UserState:            1,

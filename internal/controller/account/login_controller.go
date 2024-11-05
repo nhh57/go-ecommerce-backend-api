@@ -92,7 +92,7 @@ func (c *cUserLogin) UpdatePasswordRegister(ctx *gin.Context) {
 	}
 	result, err := service.UserLogin().UpdatePasswordRegister(ctx, params.UserToken, params.UserPassword)
 	if err != nil {
-		response.ErrorResponse(ctx, response.ErrCodeParamInvalid, err.Error())
+		response.ErrorResponse(ctx, result, err.Error())
 		return
 	}
 	response.SuccessResponse(ctx, response.ErrCodeSuccess, result)
