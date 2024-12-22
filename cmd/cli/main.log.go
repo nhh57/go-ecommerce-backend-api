@@ -35,7 +35,7 @@ func getEncoderLog() zapcore.Encoder {
 }
 
 func getWriterSync() zapcore.WriteSyncer {
-	file, err := os.OpenFile("D:/Project/Golang/github.com/nhh57/go-ecommerce-backend-api/log/log.txt", os.O_CREATE|os.O_WRONLY, 0644)
+	file, err := os.OpenFile("../storages/logs/dev.xxx.logs", os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		panic(err)
 	}

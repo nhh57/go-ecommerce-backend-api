@@ -3,9 +3,9 @@ server:
   model: "dev"
 mysql:
   host: localhost
-  port: 3306
+  port: 3316
   username: root
-  password: Admin123
+  password: root1234
   dbName: shopDev
   maxIdleConns: 10
   maxOpenConns: 100
@@ -13,12 +13,16 @@ mysql:
 logger:
   log_level: debug
   file_log_name: "../storages/logs/dev.xxx.logs"
-  max_size: 500
-  max_backups: 3
-  max_age: 28
+  max_size: 1024
+  max_backups: 30
+  max_age: 7
   compress: true
 redis:
   host: localhost
-  port: 6379
+  port: 6319
   password:
   database: 0
+jwt:
+  TOKEN_HOUR_LIFESPAN: 1
+  JWT_EXPIRATION: 1h
+  API_SECRET_KEY: "xxx.yyy.zzz"

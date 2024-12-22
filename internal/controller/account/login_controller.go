@@ -14,14 +14,29 @@ var Login = new(cUserLogin)
 
 type cUserLogin struct{}
 
+// User Login
+// @Summary      User Login
+// @Description  User Login
+// @Tags         account management
+// @Accept       json
+// @Produce      json
+// @Param        payload body model.LoginInput true "payload"
+// @Success      200  {object}  response.ResponseData
+// @Failure      500  {object}  response.ErrorResponseData
+// @Router       /user/login [post]
 func (c *cUserLogin) Login(ctx *gin.Context) {
 	// Implement logic for login
-	err := service.UserLogin().Login(ctx)
+	var params model.LoginInput
+	if err := ctx.ShouldBindJSON(&params); err != nil {
+		response.ErrorResponse(ctx, response.ErrCodeParamInvalid, err.Error())
+		return
+	}
+	codeRs, dataRs, err := service.UserLogin().Login(ctx, &params)
 	if err != nil {
 		response.ErrorResponse(ctx, response.ErrCodeParamInvalid, err.Error())
 		return
 	}
-	response.SuccessResponse(ctx, response.ErrCodeSuccess, nil)
+	response.SuccessResponse(ctx, codeRs, dataRs)
 }
 
 // Register Registration doccumentation

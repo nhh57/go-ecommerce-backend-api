@@ -59,7 +59,6 @@ func UserLogin() IUserLogin {
 	}
 	return localUserLogin
 }
-
 func InitUserLogin(i IUserLogin) {
 	localUserLogin = i
 }

@@ -14,6 +14,6 @@ func GetUserKey(key string) string {
 func GenerateCliTokenUUID(userId int) string {
 	newUUID := uuid.New()
 	// conver UUID to string , remove
-	uuid := strings.ReplaceAll(newUUID.String(), "", "")
-	return strconv.Itoa(userId) + "clitoken" + uuid
+	uuidString := strings.ReplaceAll((newUUID).String(), "", "")
+	return strconv.Itoa(userId) + "clitoken" + uuidString
 }

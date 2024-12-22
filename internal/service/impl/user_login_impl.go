@@ -10,6 +10,7 @@ import (
 	"github.com/nhh57/go-ecommerce-backend-api/internal/database"
 	"github.com/nhh57/go-ecommerce-backend-api/internal/model"
 	"github.com/nhh57/go-ecommerce-backend-api/internal/utils"
+	"github.com/nhh57/go-ecommerce-backend-api/internal/utils/auth"
 	"github.com/nhh57/go-ecommerce-backend-api/internal/utils/crypto"
 	"github.com/nhh57/go-ecommerce-backend-api/internal/utils/random"
 	"github.com/nhh57/go-ecommerce-backend-api/internal/utils/sendto"
@@ -32,7 +33,7 @@ func NewUserLoginImpl(r *database.Queries) *sUserLogin {
 	}
 }
 
-func (s *sUserLogin) Login(ctx context.Context, in *model.LoginInput) (codeResult int, out model.LoginInput, err error) {
+func (s *sUserLogin) Login(ctx context.Context, in *model.LoginInput) (codeResult int, out model.LoginOutput, err error) {
 	// login login
 	userBase, err := s.r.GetOneUserInfo(ctx, in.UserAccount)
 	if err != nil {
@@ -68,12 +69,16 @@ func (s *sUserLogin) Login(ctx context.Context, in *model.LoginInput) (codeResul
 		return response.ErrCodeAuthFailed, out, fmt.Errorf("convert to json failed %v::", err)
 	}
 	// 7. give infoUserJson to Redis with key = subToken
-	err := global.Rdb.Set(ctx, subToken, infoUserJson, time.Duration(consts.TIME_OTP_REGISTER)*time.Minute).Err()
+	err = global.Rdb.Set(ctx, subToken, infoUserJson, time.Duration(consts.TIME_OTP_REGISTER)*time.Minute).Err()
 	if err != nil {
 		return response.ErrCodeAuthFailed, out, err
 	}
 
 	//8. create
+	out.Token, err = auth.CreateToken(subToken)
+	if err != nil {
+		return
+	}
 	return 200, out, nil
 }
 
